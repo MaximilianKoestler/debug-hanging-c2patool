@@ -1,0 +1,53 @@
+{
+    "alg": "es256",
+    "private_key": "c2pa_sample/es256_private.key",
+    "sign_cert": "c2pa_sample/es256_certs.pem",
+    "ta_url": "http://timestamp.digicert.com",
+    
+    "claim_generator": "TestApp",
+    "title": "My Title",
+    "assertions": [
+        {
+            "label": "stds.schema-org.CreativeWork",
+            "data": {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                "author": [
+                    {
+                        "@type": "Person",
+                        "name": "Joe Bloggs"
+                    }
+                ]
+            }
+        },
+        {
+            "label": "c2pa.actions",
+            "data": {
+                "actions": [
+                    {
+                        "action": "c2pa.opened"
+                    }
+                ],
+                "metadata": {
+                    "reviewRatings": [
+                        {
+                            "code": "c2pa.unknown",
+                            "explanation": "Something untracked happened",
+                            "value": 4
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "label": "my.assertion",
+            "data": {
+                "any_tag": "whatever I want"
+            }
+        }
+    ],
+    "ingredient_paths": [
+        "output/signed_1_ingredient/ingredient.json",
+        "output/signed_2_ingredient/ingredient.json"
+      ]
+}
