@@ -1,5 +1,28 @@
 # debug-hanging-c2patool
 
+## Issue is Solved
+
+The problem has nothing to do with `c2patool`, I was just incorrectly discarding the `stdout` when
+calling it via Python's `subprocess.call()`.
+
+```py
+# really bad, not sure where I got this from
+subprocess.check_call(cmd, stdout=-1)
+
+# correct and works
+subprocess.check_call(cmd, stdout=subprocess.DEVNULL)
+```
+
+Only after reading this [StackOverflow answer](https://stackoverflow.com/a/4527503/7317517), I
+picked up that I incorrectly discarded the output.
+
+The `subprocess.call()` function even has a warning related to this (I think) in the official
+[documentation](https://docs.python.org/3/library/subprocess.html#subprocess.call)
+
+> **Note:** Do not use `stdout=PIPE` or `stderr=PIPE` with this function. The child process will
+> block if it generates enough output to a pipe to fill up the OS pipe buffer as the pipes are not
+> being read from.
+
 ## System Setup
 
 This repository contains the reproduction steps to get the `c2patool` to hang when combining
