@@ -28,7 +28,7 @@ def call_with_print(cmd):
 
     cmd = [C2PA_BINARY] + cmd
     print(" ".join(str(c) for c in cmd))
-    subprocess.check_call(cmd, stdout=-1)
+    subprocess.check_call(cmd, stdout=subprocess.DEVNULL)
 
 
 pathlib.Path("output").mkdir(exist_ok=True)
